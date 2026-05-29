@@ -20,11 +20,11 @@ public class SolicitudDTO {
     @NotNull(message = "El tipo de trabajo es obligatorio")
     private Long tipo;
 
-    @NotNull(message = "El ID de la empresa mandante es obligatorio")
-    private Long idEmpresaMandante;
+    @NotNull(message = "El rut de la empresa mandante es obligatorio")
+    private String rutEmpresaMandante;
 
-    @NotNull(message = "El ID de la empresa proveedora es obligatorio")
-    private Long idEmpresaProveedora;
+    @NotNull(message = "El rut de la empresa proveedora es obligatorio")
+    private String rutEmpresaProveedora;
 
     public String getDescripcion() {
         return descripcion;
@@ -66,20 +66,20 @@ public class SolicitudDTO {
         this.tipo = tipo;
     }
 
-    public Long getIdEmpresaMandante() {
-        return idEmpresaMandante;
+    public String getrutEmpresaMandante() {
+        return rutEmpresaMandante;
     }
 
-    public void setIdEmpresaMandante(Long idEmpresaMandante) {
-        this.idEmpresaMandante = idEmpresaMandante;
+    public void setrutEmpresaMandante(String rutEmpresaMandante) {
+        this.rutEmpresaMandante = rutEmpresaMandante;
     }
 
-    public Long getIdEmpresaProveedora() {
-        return idEmpresaProveedora;
+    public String getrutEmpresaProveedora() {
+        return rutEmpresaProveedora;
     }
 
-    public void setIdEmpresaProveedora(Long idEmpresaProveedora) {
-        this.idEmpresaProveedora = idEmpresaProveedora;
+    public void setrutEmpresaProveedora(String rutEmpresaProveedora) {
+        this.rutEmpresaProveedora = rutEmpresaProveedora;
     }
 
    

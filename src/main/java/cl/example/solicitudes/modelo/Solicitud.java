@@ -30,11 +30,11 @@ public class Solicitud {
     @Column(nullable = false)
     private Long tipo; 
 
-    @Column(name = "id_empresa_mandante", nullable = false)
-    private Long idEmpresaMandante; 
+    @Column(name = "rut_empresa_mandante", nullable = false, length = 15) 
+    private String rutEmpresaMandante; 
 
-    @Column(name = "id_empresa_proveedora", nullable = false)
-    private Long idEmpresaProveedora;
+    @Column(name = "rut_empresa_proveedora", nullable = false)
+    private String  rutEmpresaProveedora;
 
     public Long getIdSolicitud() {
         return idSolicitud;
@@ -84,20 +84,20 @@ public class Solicitud {
         this.tipo = tipo;
     }
 
-    public Long getIdEmpresaMandante() {
-        return idEmpresaMandante;
+    public String  getrutEmpresaMandante() {
+        return rutEmpresaMandante;
     }
 
-    public void setIdEmpresaMandante(Long idEmpresaMandante) {
-        this.idEmpresaMandante = idEmpresaMandante;
+    public void setrutEmpresaMandante(String rutEmpresaMandante) {
+        this.rutEmpresaMandante = rutEmpresaMandante;
     }
 
-    public Long getIdEmpresaProveedora() {
-        return idEmpresaProveedora;
+    public String getrutEmpresaProveedora() {
+        return rutEmpresaProveedora;
     }
 
-    public void setIdEmpresaProveedora(Long idEmpresaProveedora) {
-        this.idEmpresaProveedora = idEmpresaProveedora;
+    public void setrutEmpresaProveedora(String rutEmpresaProveedora) {
+        this.rutEmpresaProveedora = rutEmpresaProveedora;
     }
 
     

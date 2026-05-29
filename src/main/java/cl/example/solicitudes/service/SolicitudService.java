@@ -30,8 +30,8 @@ public class SolicitudService {
         solicitud.setUbicacion(dto.getUbicacion());
         solicitud.setAtendida(dto.getAtendida());
         solicitud.setTipo(dto.getTipo());
-        solicitud.setIdEmpresaMandante(dto.getIdEmpresaMandante());
-        solicitud.setIdEmpresaProveedora(dto.getIdEmpresaProveedora());
+        solicitud.setrutEmpresaMandante(dto.getrutEmpresaMandante());
+        solicitud.setrutEmpresaProveedora(dto.getrutEmpresaProveedora());
         
         return repositorio.save(solicitud);
     }
@@ -45,8 +45,8 @@ public class SolicitudService {
             solicitud.setUbicacion(dto.getUbicacion());
             solicitud.setAtendida(dto.getAtendida());
             solicitud.setTipo(dto.getTipo());
-            solicitud.setIdEmpresaMandante(dto.getIdEmpresaMandante());
-            solicitud.setIdEmpresaProveedora(dto.getIdEmpresaProveedora());
+            solicitud.setrutEmpresaMandante(dto.getrutEmpresaMandante());
+            solicitud.setrutEmpresaProveedora(dto.getrutEmpresaProveedora());
             
             return repositorio.save(solicitud);
         }
