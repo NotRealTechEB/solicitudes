@@ -1,59 +1,45 @@
 package cl.example.solicitudes.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import cl.example.solicitudes.dto.SolicitudDTO;
-import cl.example.solicitudes.modelo.Solicitud;
+import cl.example.solicitudes.dto.DtoSolicitude;
+import cl.example.solicitudes.mapper.Mapper;
 import cl.example.solicitudes.repository.SolicitudRepositorio;
 
 @Service
 public class SolicitudService {
     @Autowired
-    private SolicitudRepositorio repositorio;
+    SolicitudRepositorio repo ;
 
-    public List<Solicitud> obtenerTodas() {
-        return repositorio.findAll();
-    }
-
-    public Optional<Solicitud> obtenerPorId(Long id) {
-        return repositorio.findById(id);
-    }
-
-    public Solicitud guardarSolicitud(SolicitudDTO dto) {
-        Solicitud solicitud = new Solicitud();
-        solicitud.setDescripcion(dto.getDescripcion());
-        solicitud.setPeso(dto.getPeso());
-        solicitud.setUbicacion(dto.getUbicacion());
-        solicitud.setAtendida(dto.getAtendida());
-        solicitud.setTipo(dto.getTipo());
-        solicitud.setrutEmpresaMandante(dto.getrutEmpresaMandante());
-        solicitud.setrutEmpresaProveedora(dto.getrutEmpresaProveedora());
-        
-        return repositorio.save(solicitud);
-    }
-
-    public Solicitud actualizarSolicitud(Long id, SolicitudDTO dto) {
-        Optional<Solicitud> existente = repositorio.findById(id);
-        if (existente.isPresent()) {
-            Solicitud solicitud = existente.get();
-            solicitud.setDescripcion(dto.getDescripcion());
-            solicitud.setPeso(dto.getPeso());
-            solicitud.setUbicacion(dto.getUbicacion());
-            solicitud.setAtendida(dto.getAtendida());
-            solicitud.setTipo(dto.getTipo());
-            solicitud.setrutEmpresaMandante(dto.getrutEmpresaMandante());
-            solicitud.setrutEmpresaProveedora(dto.getrutEmpresaProveedora());
-            
-            return repositorio.save(solicitud);
+    public List<DtoSolicitude> listar(){
+        if (Mapper.parseodeLista(repo.findAll()).isEmpty()){
+            throw new RuntimeException("sin execepcuion");
         }
-        return null;
+        return Mapper.parseodeLista(repo.findAll());
     }
 
-    public void eliminarSolicitud(Long id) {
-        repositorio.deleteById(id);
+    public List<DtoSolicitude> listarRutMandante(String rut){
+        if(Mapper.parseodeLista(repo.findByRutEmpresaMandante(rut)).isEmpty()){
+            throw new RuntimeException("no existen registros con ese rut");
+        };
+        return Mapper.parseodeLista(repo.findByRutEmpresaMandante(rut));
+    }
+
+    public List<DtoSolicitude> listarRutProvedora(String rut){
+        if(Mapper.parseodeLista(repo.findByRutEmpresaProveedora(rut)).isEmpty()){
+            throw new RuntimeException("no existen registros con ese rut");
+        };
+        return Mapper.parseodeLista(repo.findByRutEmpresaProveedora(rut));
+    }
+
+    public DtoSolicitude crearSolicitud (DtoSolicitude ex){
+        repo.save(Mapper.add(ex));
+        return ex;
+    }
+
+    public DtoSolicitude modificarSolicitud (DtoSolicitude ex){
+        repo.save(Mapper.update(ex.Id(),ex));
+        return ex;
     }
 }

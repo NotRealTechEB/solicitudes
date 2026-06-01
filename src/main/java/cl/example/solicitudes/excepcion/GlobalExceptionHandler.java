@@ -16,11 +16,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> manejarValidaciones(MethodArgumentNotValidException ex) {
         Map<String, String> errores = new HashMap<>();
-        
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errores.put(error.getField(), error.getDefaultMessage());
         }
-        
         return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST); 
     }
 
@@ -28,7 +26,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> manejarErroresDeNegocio(RuntimeException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage()); 
-        
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST); 
     }
 }
