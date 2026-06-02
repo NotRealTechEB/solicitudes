@@ -13,24 +13,27 @@ public class SolicitudService {
     SolicitudRepositorio repo ;
 
     public List<DtoSolicitude> listar(){
-        if (Mapper.parseodeLista(repo.findAll()).isEmpty()){
-            throw new RuntimeException("sin execepcuion");
-        }
-        return Mapper.parseodeLista(repo.findAll());
+        List<DtoSolicitude> lista = Mapper.parseodeLista(repo.findAll());
+        if (lista.isEmpty()){
+        throw new RuntimeException("no existen solicitudes");
+    }
+        return lista;
     }
 
     public List<DtoSolicitude> listarRutMandante(String rut){
-        if(Mapper.parseodeLista(repo.findByRutEmpresaMandante(rut)).isEmpty()){
+        List<DtoSolicitude> lista= Mapper.parseodeLista(repo.findByRutEmpresaMandante(rut));
+        if(lista .isEmpty()){
             throw new RuntimeException("no existen registros con ese rut");
         };
-        return Mapper.parseodeLista(repo.findByRutEmpresaMandante(rut));
+        return lista;
     }
 
     public List<DtoSolicitude> listarRutProvedora(String rut){
-        if(Mapper.parseodeLista(repo.findByRutEmpresaProveedora(rut)).isEmpty()){
+        List<DtoSolicitude> lista =Mapper.parseodeLista(repo.findByRutEmpresaProveedora(rut));
+        if(lista.isEmpty()){
             throw new RuntimeException("no existen registros con ese rut");
         };
-        return Mapper.parseodeLista(repo.findByRutEmpresaProveedora(rut));
+        return lista;
     }
 
     public DtoSolicitude crearSolicitud (DtoSolicitude ex){
@@ -41,5 +44,17 @@ public class SolicitudService {
     public DtoSolicitude modificarSolicitud (DtoSolicitude ex){
         repo.save(Mapper.update(ex.Id(),ex));
         return ex;
+    }
+
+    public DtoSolicitude busarId(Long id){
+        DtoSolicitude ex= Mapper.DtotoModel(repo.findById(id).orElseThrow(() ->  
+        new RuntimeException("la "+id+" no existe")));
+        return ex;
+    }
+    
+    public String eliminar (Long id ){
+        busarId(id);
+        repo.deleteById(id);
+        return "la solicitud "+id +" fue eliminada";
     }
 }

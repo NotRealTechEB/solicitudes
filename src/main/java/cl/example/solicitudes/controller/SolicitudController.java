@@ -1,21 +1,17 @@
 package cl.example.solicitudes.controller;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import cl.example.solicitudes.dto.SolicitudDTO;
-import cl.example.solicitudes.modelo.Solicitud;
+import cl.example.solicitudes.dto.DtoSolicitude;
 import cl.example.solicitudes.service.SolicitudService;
 import jakarta.validation.Valid;
 
@@ -23,37 +19,38 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/solicitudes")
 public class SolicitudController {
 
-    @Autowired
-    private SolicitudService service;
+    
+    private final  SolicitudService service;
 
-    @GetMapping
-    public List<Solicitud> obtenerTodas() {
-        return service.obtenerTodas();
+    public SolicitudController(SolicitudService service) {
+        this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Solicitud> obtenerPorId(@PathVariable Long id) {
-        Optional<Solicitud> solicitud = service.obtenerPorId(id);
-        return solicitud.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/listarSolicitudes")
+    public List<DtoSolicitude> obtenerTodas() {
+        return service.listar();
     }
 
-    @PostMapping
-    public Solicitud guardarSolicitud(@Valid @RequestBody SolicitudDTO dto) {
-        return service.guardarSolicitud(dto);
+    @GetMapping("/Empresamandnate")
+    public ResponseEntity<List<DtoSolicitude>> obtenerPorRutmandante(@RequestParam(name = "rut") String  rut) {
+        return new ResponseEntity<List<DtoSolicitude>>(service.listarRutMandante(rut), HttpStatus.OK);}
+
+    @GetMapping("/EmpresaProvedora")
+    public ResponseEntity<List<DtoSolicitude>> obtenerPorRutmpProvera(@RequestParam(name = "rut") String  rut) {
+        return new ResponseEntity<List<DtoSolicitude>>(service.listarRutProvedora(rut), HttpStatus.OK);}
+    
+    @PostMapping("/crearSolicitud")
+    public ResponseEntity<DtoSolicitude> guardarSolicitud(@Valid @RequestBody DtoSolicitude dto) {
+        return new ResponseEntity<DtoSolicitude>(service.crearSolicitud(dto),HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Solicitud> actualizarSolicitud(@PathVariable Long id, @Valid @RequestBody SolicitudDTO dto) {
-        Solicitud actualizada = service.actualizarSolicitud(id, dto);
-        if (actualizada != null) {
-            return ResponseEntity.ok(actualizada);
-        }
-        return ResponseEntity.notFound().build();
+    @PutMapping("/updateSolicitud")
+    public ResponseEntity<DtoSolicitude> actualizarSolicitud(@RequestParam(name= "id") Long id, @Valid @RequestBody DtoSolicitude dto) {
+        return new ResponseEntity<DtoSolicitude>(service.modificarSolicitud(dto),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarSolicitud(@PathVariable Long id) {
-        service.eliminarSolicitud(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/EliminarSolicitudes")
+    public ResponseEntity<String> eliminarSolicitud(@RequestParam(name ="id") Long id) {
+        return new ResponseEntity< String >(service.eliminar(id),HttpStatus.OK);
     }
 }

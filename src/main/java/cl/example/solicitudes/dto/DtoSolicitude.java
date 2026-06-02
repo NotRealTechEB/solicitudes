@@ -14,7 +14,6 @@ public record DtoSolicitude(
     @NotBlank(message = "la ubicacion nunca debe esta vacia")
     @Size(message = "la ubicacion debe tener entre 5 a 150")
     String ubicacion,
-    @NotBlank()
     Boolean atendiada,
     @NotBlank(message = "debe tener un tipo")
     String tipo,
