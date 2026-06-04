@@ -1,16 +1,39 @@
 package cl.example.solicitudes.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cl.example.solicitudes.dto.DtoSolicitude;
 import cl.example.solicitudes.mapper.Mapper;
+import cl.example.solicitudes.modelo.Solicitud;
 import cl.example.solicitudes.repository.SolicitudRepositorio;
 
 @Service
 public class SolicitudService {
     @Autowired
     SolicitudRepositorio repo ;
+
+    private final ArrayList<String>  regiones = new ArrayList<>(Arrays.asList(
+            "REGIÓN DE ARICA Y PARINACOTA",
+            "REGIÓN DE TARAPACÁ",
+            "REGIÓN DE ANTOFAGASTA",
+            "REGIÓN DE ATACAMA",
+            "REGIÓN DE COQUIMBO",
+            "REGIÓN DE VALPARAÍSO",
+            "REGIÓN METROPOLITANA DE SANTIAGO",
+            "REGIÓN DEL LIBERTADOR GENERAL BERNARDO O'HIGGINS",
+            "REGIÓN DEL MAULE",
+            "REGIÓN DE ÑUBLE",
+            "REGIÓN DEL BÍO BÍO",
+            "REGIÓN DE LA ARAUCANÍA",
+            "REGIÓN DE LOS RÍOS",
+            "REGIÓN DE LOS LAGOS",
+            "REGIÓN DE AYSÉN DEL GENERAL CARLOS IBÁÑEZ DEL CAMPO",
+            "REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA"
+        ));
+    
 
     public List<DtoSolicitude> listar(){
         List<DtoSolicitude> lista = Mapper.parseodeLista(repo.findAll());
@@ -37,8 +60,16 @@ public class SolicitudService {
     }
 
     public DtoSolicitude crearSolicitud (DtoSolicitude ex){
-        repo.save(Mapper.add(ex));
-        return ex;
+        Solicitud modelo = Mapper.ModelToDto(ex);
+        for (String i : regiones) {
+            System.out.println(i);
+            System.out.println(modelo.getRegion());
+            if (i.equals(modelo.getRegion())){
+                repo.save(modelo);
+                return Mapper.DtotoModel(modelo);
+            }
+        }
+        throw new RuntimeException("no existe la region ingresada, el formato es el siguiente REGIÓN DE ARICA Y PARINACOTA");
     }
 
     public DtoSolicitude modificarSolicitud (DtoSolicitude ex){

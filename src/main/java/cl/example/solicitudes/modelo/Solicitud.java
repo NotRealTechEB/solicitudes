@@ -30,6 +30,9 @@ public class Solicitud {
     @Column(nullable = false, length = 150)
     private String ubicacion;
 
+    @Column(nullable = false, length = 150)
+    private String region;
+
     @Column(nullable = false)
     private Boolean atendida = false; 
 

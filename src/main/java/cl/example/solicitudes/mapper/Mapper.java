@@ -19,7 +19,7 @@ public class Mapper {
     }
     public static Solicitud ModelToDto (DtoSolicitude Dto){
         Solicitud model = new Solicitud(Dto.Id(),Dto.descripcion(),Dto.peso(),
-        Dto.ubicacion(),Dto.atendiada(),Dto.tipo(),Dto.rutEmpresaMandante(),Dto.rutEmpresaProveedora());
+        Dto.ubicacion(),Dto.region().toUpperCase(),Dto.atendiada(),Dto.tipo(),Dto.rutEmpresaMandante(),Dto.rutEmpresaProveedora());
     return model;}
     
     public static DtoSolicitude DtotoModel(Solicitud model){
@@ -27,7 +27,7 @@ public class Mapper {
         model.getDescripcion(),model.getPeso(),
         model.getUbicacion(),model.getAtendida()
         ,model.getTipo(),model.getRutEmpresaMandante()
-        ,model.getRutEmpresaProveedora());
+        ,model.getRutEmpresaProveedora(),model.getRegion().toUpperCase());
         return dto;
     }
 

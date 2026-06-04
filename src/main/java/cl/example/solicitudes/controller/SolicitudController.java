@@ -16,7 +16,7 @@ import cl.example.solicitudes.service.SolicitudService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/solicitudes")
+@RequestMapping("/api/v1.5/solicitudes")
 public class SolicitudController {
 
     

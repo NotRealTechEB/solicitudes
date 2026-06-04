@@ -12,7 +12,7 @@ public record DtoSolicitude(
     @PositiveOrZero(message= "el pesso deber ser entre 0 o mayor")
     double peso,
     @NotBlank(message = "la ubicacion nunca debe esta vacia")
-    @Size(message = "la ubicacion debe tener entre 5 a 150")
+    @Size(message = "la ubicacion debe tener entre 5 a 150", max = 150, min = 5)
     String ubicacion,
     Boolean atendiada,
     @NotBlank(message = "debe tener un tipo")
@@ -20,7 +20,10 @@ public record DtoSolicitude(
     @NotBlank(message = "la empresa mandante debe tener rut")
     String rutEmpresaMandante,
     @NotBlank(message =  "la empresa a la que se le pide la solicitud debe tener rut")
-    String rutEmpresaProveedora
+    String rutEmpresaProveedora,
+    @NotBlank(message =  "deve ingreasr la region")
+    @Size(message = "debemos tener entre 4 a 150 caracteres", max = 150, min = 5)
+    String region
 ) {
 
 }
