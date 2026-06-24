@@ -3,7 +3,6 @@ package cl.example.solicitudes.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cl.example.solicitudes.dto.DtoSolicitude;
 import cl.example.solicitudes.mapper.Mapper;
@@ -12,8 +11,11 @@ import cl.example.solicitudes.repository.SolicitudRepositorio;
 
 @Service
 public class SolicitudService {
-    @Autowired
-    SolicitudRepositorio repo ;
+    
+    private SolicitudRepositorio repo ;
+    public SolicitudService (SolicitudRepositorio repo){
+        this.repo = repo;
+    }
 
     private final ArrayList<String>  regiones = new ArrayList<>(Arrays.asList(
             "REGIÓN DE ARICA Y PARINACOTA",
