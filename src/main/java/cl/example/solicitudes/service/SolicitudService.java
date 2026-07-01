@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import cl.example.solicitudes.dto.DtoSolicitude;
+import cl.example.solicitudes.excepcion.ResourceError;
 import cl.example.solicitudes.mapper.Mapper;
 import cl.example.solicitudes.modelo.Solicitud;
 import cl.example.solicitudes.repository.SolicitudRepositorio;
@@ -71,7 +72,7 @@ public class SolicitudService {
                 return Mapper.DtotoModel(modelo);
             }
         }
-        throw new RuntimeException("no existe la region ingresada, el formato es el siguiente REGIÓN DE ARICA Y PARINACOTA");
+        throw new ResourceError("no existe la region ingresada, el formato es el siguiente REGIÓN DE ARICA Y PARINACOTA");
     }
 
     public DtoSolicitude modificarSolicitud (DtoSolicitude ex){

@@ -159,7 +159,6 @@ public class SolicitudController {
     @Operation(
     summary = "elimina  una solicitud  por id ",
     description = "elimina  una  solicitudes mediante las id, solo los administradoes puenden acceder a esta funcion. ")
-    
     @ApiResponses({
     @ApiResponse(responseCode = "200", description = "Operación exitosa"),
     @ApiResponse(responseCode = "404", description = "ip inexistente")})
