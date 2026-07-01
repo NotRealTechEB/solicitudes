@@ -37,6 +37,8 @@ public class GlobalExceptionHandler {
     }
 
     public ResponseEntity<DtoExeption> resourceNotFound (ResourceError ex, HttpServletRequest request){
+        System.out.println("¡ENTRÓ EN MI MANEJADOR DE ERRORES!");
+        System.err.println(ex.getMessage());
         return buildResponse(HttpStatus.NOT_FOUND, "Recurso no encontrado",
         request.getRequestURI(), null);
     }
