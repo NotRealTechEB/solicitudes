@@ -41,7 +41,7 @@ public class SolicitudService {
     public List<DtoSolicitude> listar(){
         List<DtoSolicitude> lista = Mapper.parseodeLista(repo.findAll());
         if (lista.isEmpty()){
-        throw new RuntimeException("no existen solicitudes");
+        throw new ResourceError("no existen solicitudes");
     }
         return lista;
     }
@@ -49,7 +49,7 @@ public class SolicitudService {
     public List<DtoSolicitude> listarRutMandante(String rut){
         List<DtoSolicitude> lista= Mapper.parseodeLista(repo.findByRutEmpresaMandante(rut));
         if(lista .isEmpty()){
-            throw new RuntimeException("no existen registros con ese rut");
+            throw new ResourceError("no existen registros con ese rut");
         };
         return lista;
     }
@@ -57,7 +57,7 @@ public class SolicitudService {
     public List<DtoSolicitude> listarRutProvedora(String rut){
         List<DtoSolicitude> lista =Mapper.parseodeLista(repo.findByRutEmpresaProveedora(rut));
         if(lista.isEmpty()){
-            throw new RuntimeException("no existen registros con ese rut");
+            throw new ResourceError("no existen registros con ese rut");
         };
         return lista;
     }
@@ -82,7 +82,7 @@ public class SolicitudService {
 
     public DtoSolicitude busarId(Long id){
         DtoSolicitude ex= Mapper.DtotoModel(repo.findById(id).orElseThrow(() ->  
-        new RuntimeException("la "+id+" no existe")));
+        new ResourceError("la "+id+" no existe")));
         return ex;
     }
     
