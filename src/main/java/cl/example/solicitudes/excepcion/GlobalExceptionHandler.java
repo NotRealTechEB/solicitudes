@@ -35,11 +35,11 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.BAD_REQUEST, "errores en los argumentos",
         request.getRequestURI(), errores); 
     }
-
+    @ExceptionHandler(ResourceError.class)
     public ResponseEntity<DtoExeption> resourceNotFound (ResourceError ex, HttpServletRequest request){
         System.out.println("¡ENTRÓ EN MI MANEJADOR DE ERRORES!");
-        System.err.println(ex.getMessage());
-        return buildResponse(HttpStatus.NOT_FOUND, "Recurso no encontrado",
+        System.out.println(ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(),
         request.getRequestURI(), null);
     }
 
