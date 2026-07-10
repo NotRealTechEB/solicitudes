@@ -39,6 +39,11 @@ public class SolicitudController {
 
     }
 
+    @GetMapping("/despertar")
+    public ResponseEntity<String> despierta () {
+        return new ResponseEntity<String>( service.despierta(),HttpStatus.OK);
+    }
+    
     @Operation(
     summary = "Lsita todas las solicitudes ",
     description = "Retorna todas las solicitudes existentes " )

@@ -91,4 +91,7 @@ public class SolicitudService {
         repo.deleteById(id);
         return "la solicitud "+id +" fue eliminada";
     }
+    public String despierta(){
+        return "despierto";
+    }
 }
