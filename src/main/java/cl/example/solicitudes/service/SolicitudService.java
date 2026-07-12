@@ -18,24 +18,24 @@ public class SolicitudService {
         this.repo = repo;
     }
 
-    private final ArrayList<String>  regiones = new ArrayList<>(Arrays.asList(
-            "REGIÓN DE ARICA Y PARINACOTA",
-            "REGIÓN DE TARAPACÁ",
-            "REGIÓN DE ANTOFAGASTA",
-            "REGIÓN DE ATACAMA",
-            "REGIÓN DE COQUIMBO",
-            "REGIÓN DE VALPARAÍSO",
-            "REGIÓN METROPOLITANA DE SANTIAGO",
-            "REGIÓN DEL LIBERTADOR GENERAL BERNARDO O'HIGGINS",
-            "REGIÓN DEL MAULE",
-            "REGIÓN DE ÑUBLE",
-            "REGIÓN DEL BÍO BÍO",
-            "REGIÓN DE LA ARAUCANÍA",
-            "REGIÓN DE LOS RÍOS",
-            "REGIÓN DE LOS LAGOS",
-            "REGIÓN DE AYSÉN DEL GENERAL CARLOS IBÁÑEZ DEL CAMPO",
-            "REGIÓN DE MAGALLANES Y DE LA ANTÁRTICA CHILENA"
-        ));
+private final ArrayList<String> regiones = new ArrayList<>(Arrays.asList(
+    "ARICA Y PARINACOTA",
+    "TARAPACÁ",
+    "ANTOFAGASTA",
+    "ATACAMA",
+    "COQUIMBO",
+    "VALPARAÍSO",
+    "METROPOLITANA DE SANTIAGO",
+    "OHIGGINS",
+    "MAULE",
+    "ÑUBLE",
+    "BÍO BÍO",
+    "ARAUCANÍA",
+    "LOS RÍOS",
+    "LOS LAGOS",
+    "AYSÉN",
+    "MAGALLANES Y ANTÁRTICA CHILENA"
+));
     
 
     public List<DtoSolicitude> listar(){
@@ -72,7 +72,22 @@ public class SolicitudService {
                 return Mapper.DtotoModel(modelo);
             }
         }
-        throw new ResourceError("no existe la region ingresada, el formato es el siguiente REGIÓN DE ARICA Y PARINACOTA");
+        throw new ResourceError("no existe la region ingresada, el formato es el siguiente \"ARICA Y PARINACOTA\",\n" + //
+                        "    \"TARAPACÁ\",\n" + //
+                        "    \"ANTOFAGASTA\",\n" + //
+                        "    \"ATACAMA\",\n" + //
+                        "    \"COQUIMBO\",\n" + //
+                        "    \"VALPARAÍSO\",\n" + //
+                        "    \"METROPOLITANA DE SANTIAGO\",\n" + //
+                        "    \"OHIGGINS\",\n" + //
+                        "    \"MAULE\",\n" + //
+                        "    \"ÑUBLE\",\n" + //
+                        "    \"BÍO BÍO\",\n" + //
+                        "    \"ARAUCANÍA\",\n" + //
+                        "    \"LOS RÍOS\",\n" + //
+                        "    \"LOS LAGOS\",\n" + //
+                        "    \"AYSÉN\",\n" + //
+                        "    \"MAGALLANES Y ANTÁRTICA CHILENA\"");
     }
 
     public DtoSolicitude modificarSolicitud (DtoSolicitude ex){
