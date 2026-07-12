@@ -36,7 +36,7 @@ public class Solicitud {
     @Column(nullable = false)
     private Boolean atendida = false; 
 
-    @Column(nullable = false, length = 30 )
+    @Column(nullable = false, length = 150 )
     private String tipo; 
 
     @Column(name = "rut_empresa_mandante", nullable = false, length = 15) 
